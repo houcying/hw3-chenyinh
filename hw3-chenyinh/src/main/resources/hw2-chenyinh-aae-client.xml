@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<customResourceSpecifier xmlns="http://uima.apache.org/resourceSpecifier">
+  <resourceClassName>org.apache.uima.aae.jms_adapter.JmsAnalysisEngineServiceAdapter</resourceClassName>
+  <parameters>
+    <parameter name="brokerURL" value="tcp://houcy-ThinkPad-T510:61616"/>
+    <parameter name="endpoint"  value="myQueueName"/>
+      <parameter name="timeout" value="5000"/>
+      <parameter name="getmetatimeout" value="5000"/>
+      <parameter name="binary_serialization" value="false"/>
+      <parameter name="ignore_process_errors" value="false"/>
+  </parameters>
+</customResourceSpecifier>
