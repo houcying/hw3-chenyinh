@@ -1,3 +1,6 @@
+/*
+ * NameEntity Scoring generates score for each answer by calculating overlap among same mention type
+ * */
 package edu.cmu.deiis.annotators;
 
 import java.util.ArrayList;
@@ -31,21 +34,22 @@ public class NameEntityScore extends JCasAnnotator_ImplBase {
      * answer
      */
     
-
-    
     AnnotationIndex<Annotation> idxQst = aJCas.getAnnotationIndex(Question.type);
     FSIterator<Annotation> itQst = idxQst.iterator();
 
     AnnotationIndex<Annotation> idxtAns = aJCas.getAnnotationIndex(Answer.type);
     FSIterator<Annotation> itAns = idxtAns.iterator();
-
+    
+    
     while(itQst.hasNext())
     {
+      /*get one question from question index */
       Question qst = (Question) itQst.next();
       ArrayList<String> QstArray = new ArrayList<String>();
       FSIndex  nameEntityindexq = aJCas.getAnnotationIndex(NamedEntityMention.type);
       FSIterator neitq =  nameEntityindexq.iterator();
       
+      /*get mentions in the same mention type in a question */
       while (neitq.hasNext()) {
         NamedEntityMention mentionq = (NamedEntityMention) neitq.next();
         if((mentionq.getBegin() >= qst.getBegin()) && (mentionq.getEnd() <= qst.getEnd()))
@@ -59,12 +63,12 @@ public class NameEntityScore extends JCasAnnotator_ImplBase {
       
       while(itAns.hasNext())
       { 
+        /*get one answer from answer index */
         Answer ans = (Answer) itAns.next();
         ArrayList<String> AnsArray = new ArrayList<String>();
         FSIndex  nameEntityindexa = aJCas.getAnnotationIndex(NamedEntityMention.type);
         FSIterator neita =  nameEntityindexa.iterator();
-        
-        System.out.println(ans.toString());
+        /*get mentions in the same mention type in an answer */
         while (neita.hasNext()) {
           NamedEntityMention mentiona = (NamedEntityMention) neita.next();
        
@@ -79,10 +83,6 @@ public class NameEntityScore extends JCasAnnotator_ImplBase {
             }
             
           }
-          
-          
-          
-          
         }
         
         /*compute the score*/
@@ -105,8 +105,7 @@ public class NameEntityScore extends JCasAnnotator_ImplBase {
         annotation.setScore(score);
         annotation.addToIndexes();
       }
-    }
-    
+     } 
 
   }
 }

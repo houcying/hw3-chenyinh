@@ -46,7 +46,8 @@ public class EvaluatorConsumer extends CasConsumer_ImplBase{
       return 0;
     }
    };
-
+    
+   /*compare the score of namedentity scoring method*/
     @Override
     public void processCas(CAS aCAS) throws ResourceProcessException {
       
